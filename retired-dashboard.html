@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retired Dashboard | Job Connect</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body{font-family:'Poppins',sans-serif;margin:0;background:#f5f9ff;color:#1c1c1c;}
+    header.hero{
+      background:linear-gradient(135deg,#007bff,#0056d2);
+      color:#fff;
+      text-align:center;
+      padding:50px 20px 30px;
+      border-bottom-left-radius:40px;
+      border-bottom-right-radius:40px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);
+      position:relative;
+    }
+    header.hero h1{margin:0;font-size:2rem;}
+    header.hero p{margin-top:6px;opacity:.9;}
+    .logout-btn{
+      position:absolute;
+      top:18px;
+      right:18px;
+      background:#fff;
+      color:#0056d2;
+      border:none;
+      padding:8px 14px;
+      font-weight:600;
+      border-radius:8px;
+      cursor:pointer;
+      transition:.2s;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    }
+    .logout-btn:hover{background:#e8f0ff;transform:translateY(-1px);}
+    .content{max-width:800px;margin:40px auto 100px;padding:0 20px;}
+    .section{
+      background:#fff;
+      border-radius:20px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.08);
+      padding:25px;
+      margin-bottom:30px;
+    }
+    .section h2{margin-top:0;color:#0a2d7c;}
+    ul{list-style:none;padding:0;}
+    li{margin-bottom:8px;border-left:4px solid #007bff;padding-left:8px;}
+    .no-data{color:#888;font-style:italic;}
+    .bottom-nav{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      background:#fff;
+      display:flex;
+      justify-content:space-around;
+      border-top:1px solid #ddd;
+      padding:10px 0;
+      box-shadow:0 -3px 8px rgba(0,0,0,0.1);
+      z-index:100;
+    }
+    .bottom-nav a{
+      color:#0056d2;
+      font-weight:600;
+      text-decoration:none;
+      font-size:.95rem;
+    }
+    .bottom-nav a.active{color:#007bff;}
+    footer{text-align:center;color:#fff;background:#0056d2;padding:20px 10px;margin-top:60px;}
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Retired Professional Dashboard</h1>
+    <p>Track your applied jobs and appointments</p>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </header>
+
+  <div class="content">
+    <div class="section">
+      <h2>Applied Jobs</h2>
+      <ul id="appliedJobs"></ul>
+      <p id="noApplied" class="no-data">You haven't applied for any jobs yet.</p>
+    </div>
+
+    <div class="section">
+      <h2>Appointments / Offers</h2>
+      <ul>
+        <li><strong>Sunrise Coaching Classes</strong> — Hired you as <em>Part-Time Teacher</em></li>
+        <li><strong>ABC Pvt Ltd</strong> — Interview Scheduled for <em>Consultant Role</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="retired-dashboard.html" class="active">📊 Dashboard</a>
+    <a href="retired-jobs.html">💼 Jobs</a>
+    <a href="retired-profile.html">👤 Profile</a>
+  </nav>
+
+  <footer>
+    <p>© 2025 Job Connect | Built by Ved Shrivastava & Praful Bansal</p>
+  </footer>
+
+  <script>
+    function logout(){
+      localStorage.removeItem('retiredLoggedIn');
+      alert('You have been logged out successfully!');
+      window.location.href='index.html';
+    }
+
+    window.addEventListener('DOMContentLoaded',()=>{
+      const applied=JSON.parse(localStorage.getItem('appliedJobs'))||[];
+      const list=document.getElementById('appliedJobs');
+      const msg=document.getElementById('noApplied');
+
+      if(applied.length===0){
+        msg.style.display='block';
+      }else{
+        msg.style.display='none';
+        applied.forEach(job=>{
+          const li=document.createElement('li');
+          li.innerHTML=`<strong>${job.title}</strong> — ${job.description}`;
+          list.appendChild(li);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

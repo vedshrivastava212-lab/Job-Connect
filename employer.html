@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Connect | Employer Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="hero">
+    <div class="logo">
+      <div class="logo-icon">👨‍💼</div>
+      <h1>Job Connect</h1>
+    </div>
+    <p class="tagline">Hire the Experienced. Build Better.</p>
+  </header>
+
+  <main class="form-container">
+    <h2>Employer Login</h2>
+    <form id="employerLoginForm">
+      <input type="email" id="employerEmail" placeholder="Enter your email" required>
+      <input type="password" id="employerPassword" placeholder="Enter your password" required>
+      <button type="submit" class="btn">Login</button>
+    </form>
+
+    <div class="note-box">
+      <p><b>Demo Login</b></p>
+      <p>Email: <code>employer@jobconnect.com</code></p>
+      <p>Password: <code>employer123</code></p>
+    </div>
+  </main>
+
+  <!-- ✅ Simplified bottom navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="success.html">🌟 Stories</a>
+    <a href="contact.html">📞 Contact</a>
+  </nav>
+
+  <footer>
+    <p>© 2025 Job Connect | Prototype by Ved Shrivastava & Praful Bansal</p>
+  </footer>
+
+  <script>
+    const employerForm = document.getElementById("employerLoginForm");
+
+    employerForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("employerEmail").value.trim();
+      const password = document.getElementById("employerPassword").value.trim();
+
+      if (email === "employer@jobconnect.com" && password === "employer123") {
+        const demoUser = {
+          role: "employer",
+          name: "Demo Employer",
+          email,
+          contact: "9823001122",
+        };
+        localStorage.setItem("jobconnect_user", JSON.stringify(demoUser));
+        alert("✅ Login successful! Redirecting to Dashboard...");
+        window.location.href = "employer-dashboard.html";
+      } else {
+        alert("❌ Invalid credentials!");
+      }
+    });
+  </script>
+
+</body>
+</html>

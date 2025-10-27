@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employer Profile | Job Connect</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body{font-family:'Poppins',sans-serif;margin:0;background:#f5f9ff;color:#1c1c1c;}
+    header.hero{background:linear-gradient(135deg,#007bff,#0056d2);color:#fff;text-align:center;
+      padding:50px 20px 30px;border-bottom-left-radius:40px;border-bottom-right-radius:40px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+    header.hero h1{margin:0;font-size:2rem;}
+    header.hero p{margin-top:6px;opacity:.9;}
+    .profile-container{max-width:700px;margin:40px auto 100px;padding:0 20px;}
+    .profile-card{background:#fff;border-radius:20px;box-shadow:0 4px 15px rgba(0,0,0,0.08);
+      padding:25px;}
+    .profile-card h2{text-align:center;color:#0a2d7c;}
+    .form-group{margin-bottom:20px;}
+    label{display:block;font-weight:600;margin-bottom:6px;color:#333;}
+    input,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #ccc;
+      font-size:1rem;outline:none;transition:.2s;box-sizing:border-box;}
+    input:focus,textarea:focus{border-color:#007bff;box-shadow:0 0 5px rgba(0,123,255,.3);}
+    button.save-btn{width:100%;background:linear-gradient(135deg,#007bff,#0056d2);color:#fff;
+      padding:12px;font-size:1rem;font-weight:600;border:none;border-radius:10px;cursor:pointer;
+      transition:background .3s;}
+    button.save-btn:hover{background:linear-gradient(135deg,#0056d2,#003fa3);}
+    .success-msg{display:none;text-align:center;color:#007bff;font-weight:600;margin-top:10px;}
+    .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;
+      justify-content:space-around;border-top:1px solid #ddd;padding:10px 0;
+      box-shadow:0 -3px 8px rgba(0,0,0,0.1);z-index:100;}
+    .bottom-nav a{color:#0056d2;font-weight:600;text-decoration:none;font-size:.95rem;}
+    .bottom-nav a.active{color:#007bff;}
+    footer{text-align:center;color:#fff;background:#0056d2;padding:20px 10px;margin-top:60px;}
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Employer Profile</h1>
+  <p>Update your details and keep your information current</p>
+</header>
+
+<div class="profile-container">
+  <div class="profile-card">
+    <h2>Edit Profile</h2>
+    <form id="employerProfileForm">
+      <div class="form-group">
+        <label for="employerName">Full Name</label>
+        <input type="text" id="employerName" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label for="companyName">Company Name</label>
+        <input type="text" id="companyName" placeholder="Enter your company name" required>
+      </div>
+      <div class="form-group">
+        <label for="employerEmail">Email</label>
+        <input type="email" id="employerEmail" placeholder="Enter email" required>
+      </div>
+      <div class="form-group">
+        <label for="employerPhone">Phone Number</label>
+        <input type="tel" id="employerPhone" placeholder="Enter phone number" required>
+      </div>
+      <div class="form-group">
+        <label for="employerBio">About / Description</label>
+        <textarea id="employerBio" rows="4" placeholder="Write something about your company..."></textarea>
+      </div>
+      <button type="submit" class="save-btn">💾 Save Changes</button>
+      <div class="success-msg" id="successMsg">✅ Profile updated successfully!</div>
+    </form>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html">🏠 Home</a>
+  <a href="employer-dashboard.html">📊 Dashboard</a>
+  <a href="add-job.html">➕ Add Job</a>
+  <a href="employer-profile.html" class="active">👤 Profile</a>
+</nav>
+
+<footer>
+  <p>© 2025 Job Connect | Built by Ved Shrivastava & Praful Bansal</p>
+</footer>
+
+<script>
+const form=document.getElementById('employerProfileForm');
+const msg=document.getElementById('successMsg');
+
+// load saved data
+window.addEventListener('DOMContentLoaded',()=>{
+  ['employerName','companyName','employerEmail','employerPhone','employerBio']
+  .forEach(id=>{
+    document.getElementById(id).value=localStorage.getItem(id)||'';
+  });
+});
+
+// save data
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  ['employerName','companyName','employerEmail','employerPhone','employerBio']
+  .forEach(id=>{
+    localStorage.setItem(id,document.getElementById(id).value);
+  });
+  msg.style.display='block';
+  setTimeout(()=>msg.style.display='none',2000);
+});
+</script>
+</body>
+</html>

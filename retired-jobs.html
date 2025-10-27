@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jobs | Job Connect</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body{font-family:'Poppins',sans-serif;margin:0;background:#f5f9ff;color:#1c1c1c;}
+    header.hero{background:linear-gradient(135deg,#007bff,#0056d2);color:#fff;text-align:center;
+      padding:50px 20px 30px;border-bottom-left-radius:40px;border-bottom-right-radius:40px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+    header.hero h1{margin:0;font-size:2rem;}
+    header.hero p{margin-top:6px;opacity:.9;}
+    .jobs-container{max-width:800px;margin:40px auto 100px;padding:0 20px;}
+    .job-card{background:#fff;border-radius:20px;box-shadow:0 4px 15px rgba(0,0,0,0.08);
+      padding:25px;margin-bottom:25px;}
+    .job-card h3{color:#0056d2;margin:0;}
+    .job-card p{margin:10px 0;}
+    button.apply-btn{background:linear-gradient(135deg,#007bff,#0056d2);color:#fff;border:none;
+      padding:10px 16px;border-radius:8px;cursor:pointer;font-weight:600;}
+    button.apply-btn:hover{background:linear-gradient(135deg,#0056d2,#003a99);}
+    .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;
+      justify-content:space-around;border-top:1px solid #ddd;padding:10px 0;
+      box-shadow:0 -3px 8px rgba(0,0,0,0.1);z-index:100;}
+    .bottom-nav a{color:#0056d2;font-weight:600;text-decoration:none;font-size:.95rem;}
+    .bottom-nav a.active{color:#007bff;}
+    footer{text-align:center;color:#fff;background:#0056d2;padding:20px 10px;margin-top:60px;}
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Available Jobs</h1>
+  <p>Matching your skills and profession</p>
+</header>
+
+<div class="jobs-container" id="jobsContainer"></div>
+
+<nav class="bottom-nav">
+  <a href="index.html">🏠 Home</a>
+  <a href="retired-dashboard.html">📊 Dashboard</a>
+  <a href="retired-jobs.html" class="active">💼 Jobs</a>
+  <a href="retired-profile.html">👤 Profile</a>
+</nav>
+
+<footer>
+  <p>© 2025 Job Connect | Built by Ved Shrivastava & Praful Bansal</p>
+</footer>
+
+<script>
+const jobs=[
+  {title:'Part-Time Teacher',description:'Teach students at a local academy.',skill:'teaching'},
+  {title:'Account Assistant',description:'Help manage records for a small business.',skill:'account'},
+  {title:'Office Consultant',description:'Guide management on efficiency.',skill:'management'},
+  {title:'Workshop Mentor',description:'Mentor young engineers on practical work.',skill:'engineering'}
+];
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const container=document.getElementById('jobsContainer');
+  const userSkill=(localStorage.getItem('retiredSkills')||'').toLowerCase();
+
+  const filtered=jobs.filter(j=>userSkill.includes(j.skill));
+
+  (filtered.length?filtered:jobs).forEach(job=>{
+    const card=document.createElement('div');
+    card.className='job-card';
+    card.innerHTML=`
+      <h3>${job.title}</h3>
+      <p>${job.description}</p>
+      <button class="apply-btn">Apply</button>`;
+    card.querySelector('button').addEventListener('click',()=>{
+      const applied=JSON.parse(localStorage.getItem('appliedJobs'))||[];
+      applied.push(job);
+      localStorage.setItem('appliedJobs',JSON.stringify(applied));
+      alert('✅ Applied Successfully!');
+    });
+    container.appendChild(card);
+  });
+});
+</script>
+</body>
+</html>

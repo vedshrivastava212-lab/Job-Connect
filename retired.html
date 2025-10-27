@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Connect | Retired Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="hero">
+    <div class="logo">
+      <div class="logo-icon">👴</div>
+      <h1>Job Connect</h1>
+    </div>
+    <p class="tagline">Experience Never Retires</p>
+  </header>
+
+  <main class="form-container">
+    <h2>Retired Professional Login</h2>
+    <form id="retiredLoginForm">
+      <input type="email" id="retiredEmail" placeholder="Enter your email" required>
+      <input type="password" id="retiredPassword" placeholder="Enter your password" required>
+      <button type="submit" class="btn">Login</button>
+    </form>
+
+    <div class="note-box">
+      <p><b>Demo Login</b></p>
+      <p>Email: <code>retired@jobconnect.com</code></p>
+      <p>Password: <code>retired123</code></p>
+    </div>
+  </main>
+
+  <!-- ✅ Simplified bottom navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="success.html">🌟 Stories</a>
+    <a href="contact.html">📞 Contact</a>
+  </nav>
+
+  <footer>
+    <p>© 2025 Job Connect | Prototype by Ved Shrivastava & Praful Bansal</p>
+  </footer>
+
+  <script>
+    const retiredForm = document.getElementById("retiredLoginForm");
+
+    retiredForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("retiredEmail").value.trim();
+      const password = document.getElementById("retiredPassword").value.trim();
+
+      if (email === "retired@jobconnect.com" && password === "retired123") {
+        const demoUser = {
+          role: "retired",
+          name: "Demo Retired User",
+          email,
+          contact: "9876543210",
+        };
+        localStorage.setItem("jobconnect_user", JSON.stringify(demoUser));
+        alert("✅ Login successful! Redirecting to Jobs...");
+        window.location.href = "retired-dashboard.html";
+      } else {
+        alert("❌ Invalid credentials!");
+      }
+    });
+  </script>
+
+</body>
+</html>
